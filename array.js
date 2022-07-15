@@ -9,8 +9,8 @@ export const replaceItemById = (list, item) => list.filter(o => o.id !== item.id
 
 export const dropIfIncluded = (as, bs, isEq) => as.filter(a => !bs.find(b => isEq(a, b)))
 
-export const onlyHan=chars=>
-chars.filter(char => /\p{Script=Han}/u.test(char))
+export const onlyHan = chars =>
+	chars.filter(char => /\p{Script=Han}/u.test(char))
 
-export const unique=array=>
-[...new Set(array)]
+export const unique = array =>
+	[...new Set(array)]
