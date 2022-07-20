@@ -5,7 +5,7 @@ export const last = arr => arr[arr.length - 1]
 
 export const getItemById = (list, id) => list.find(o => o.id === id)
 
-export const replaceItemById = (list, item) => dropItemById(list,item.id).concat(item)
+export const replaceItemById = (list, item) => list.map(o => o.id === item.id ? item : o)
 
 export const dropItemById = (list, id) => list.filter(o => o.id !== id)
 
