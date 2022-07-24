@@ -16,3 +16,6 @@ export const onlyHan = chars =>
 
 export const unique = array =>
 	[...new Set(array)]
+
+export const range = (beg, end) =>
+	Array(end - beg).map((_, i) => i + beg)
