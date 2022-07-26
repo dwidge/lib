@@ -3,9 +3,18 @@
   "version": "0.1.0",
   "license": "Apache-2.0",
   "private": true,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "exports": {
+    "import": {".": "dist/index.js", "./":"dist/"},
+    "require": {".": "dist/index.js", "./":"dist/"}
+  },
   "dependencies": {
   },
   "devDependencies": {
+    "@babel/cli": "^7.18.9",
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
     "eslint": "^8.0.1",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.25.2",
@@ -13,6 +22,7 @@
     "eslint-plugin-promise": "^6.0.0"
   },
   "scripts": {
+    "build": "npx babel src --out-dir dist",
     "lint": "eslint . --fix"
   }
 }
