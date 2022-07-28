@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "license": "Apache-2.0",
   "private": true,
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "./dist/index.js",
   "exports": {
-    "import": {".": "dist/index.js", "./":"dist/"},
-    "require": {".": "dist/index.js", "./":"dist/"}
+    ".": "./dist/index.js"
   },
   "dependencies": {
   },
