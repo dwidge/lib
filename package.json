@@ -3,18 +3,13 @@
 	"version": "0.1.1",
 	"license": "Apache-2.0",
 	"private": true,
-	"main": "dist/index.js",
-	"module": "dist/index.js",
+	"main": "./dist/index.js",
 	"exports": {
-		"import": {
-			".": "dist/index.js",
-			"./": "dist/"
-		},
-		"require": {
-			".": "dist/index.js",
-			"./": "dist/"
-		}
+		".": "./dist/index.js"
 	},
+	"files": [
+		"dist"
+	],
 	"devDependencies": {
 		"@babel/cli": "^7.18.9",
 		"@babel/core": "^7.18.6",
