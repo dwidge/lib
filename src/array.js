@@ -1,5 +1,6 @@
 // gist.github.com/femto113/1784503?permalink_comment_id=1701169#gistcomment-1701169
 export const transpose = a => a[0].map((_, c) => a.map(r => r[c]))
+export const zip = transpose
 
 export const last = arr => arr[arr.length - 1]
 

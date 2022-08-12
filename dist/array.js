@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.unique = exports.transpose = exports.replaceItemById = exports.range = exports.onlyHan = exports.last = exports.getItemById = exports.dropItemById = exports.dropIfIncluded = void 0;
+exports.zip = exports.unique = exports.transpose = exports.replaceItemById = exports.range = exports.onlyHan = exports.last = exports.getItemById = exports.dropItemById = exports.dropIfIncluded = void 0;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -27,6 +27,8 @@ var transpose = function transpose(a) {
 };
 
 exports.transpose = transpose;
+var zip = transpose;
+exports.zip = zip;
 
 var last = function last(arr) {
   return arr[arr.length - 1];
