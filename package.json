@@ -29,6 +29,7 @@
 	"scripts": {
 		"build": "cross-env rm -rf dist && NODE_ENV=production babel src --out-dir dist --copy-files && rm -rf dist/__*__",
 		"test": "jest",
+		"test:w": "jest --watch",
 		"lint": "esw . --ext .js,.json,.*rc --changed",
 		"commit": "npm run lint -- --fix && npm run test -- --watchAll=false && npm run build && git add . && git commit -m",
 		"push": "npm version patch && git push --follow-tags"

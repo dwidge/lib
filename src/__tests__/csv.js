@@ -1,17 +1,17 @@
 import { calcCsvFromObjects, calcObjectsFromCsv, mapObject } from '../csv.js'
 
 const obj = [
-	{ a: 11, b: 12 },
-	{ a: 21, b: 22 },
+	{ a: 11, b: [121, 122] },
+	{ a: 21, b: [221, 222] },
 ]
 const objc = [
-	{ c: '12' },
-	{ c: '22' },
+	{ c: '11' },
+	{ c: '21' },
 ]
 const csv = `
 a,b
-11,12
-21,22
+11,121;122
+21,221;222
 `.trim()
 
 it('calcCsvFromObjects', async () => {
@@ -21,5 +21,5 @@ it('calcObjectsFromCsv', async () => {
 	expect(calcObjectsFromCsv(csv)).toEqual(obj)
 })
 it('mapObject', async () => {
-	expect(obj.map(mapObject(['b'], ['c'], [v => '' + v]))).toEqual(objc)
+	expect(obj.map(mapObject(['a'], ['c'], [v => '' + v]))).toEqual(objc)
 })

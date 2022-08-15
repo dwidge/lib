@@ -9,8 +9,11 @@ var _array = require("./array.js");
 
 var calcCsvFromObjects = function calcCsvFromObjects(objects) {
   var del = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ',';
+  var arraydel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ';';
   return [Object.keys(objects[0]).join(del)].concat(objects.map(function (o) {
-    return Object.values(o).join(del);
+    return Object.values(o).map(function (a) {
+      return a instanceof Array ? a.join(arraydel) : a;
+    }).join(del);
   })).join('\n');
 };
 
@@ -18,6 +21,7 @@ exports.calcCsvFromObjects = calcCsvFromObjects;
 
 var calcObjectsFromCsv = function calcObjectsFromCsv(csv) {
   var del = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ',';
+  var arraydel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ';';
   var lines = csv.split('\n').map(function (l) {
     return l.split(del);
   });
@@ -27,8 +31,12 @@ var calcObjectsFromCsv = function calcObjectsFromCsv(csv) {
     return isNaN(+v) ? v : +v;
   };
 
+  var arrstr = function arrstr(v) {
+    return v.includes(arraydel) ? v.split(arraydel).map(numstr) : numstr(v);
+  };
+
   return lines.slice(1).map(function (l) {
-    return Object.fromEntries((0, _array.transpose)([keys, l.map(numstr)]));
+    return Object.fromEntries((0, _array.transpose)([keys, l.map(arrstr)]));
   });
 };
 
