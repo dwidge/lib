@@ -16,9 +16,11 @@ a,b
 
 it('calcCsvFromObjects', async () => {
 	expect(calcCsvFromObjects(obj)).toEqual(csv)
+	expect(calcCsvFromObjects([])).toEqual('')
 })
 it('calcObjectsFromCsv', async () => {
 	expect(calcObjectsFromCsv(csv)).toEqual(obj)
+	expect(calcObjectsFromCsv('')).toEqual([])
 })
 it('mapObject', async () => {
 	expect(obj.map(mapObject(['a'], ['c'], [v => '' + v]))).toEqual(objc)

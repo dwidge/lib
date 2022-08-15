@@ -1,9 +1,11 @@
 import { transpose } from './array.js'
 
 export const calcCsvFromObjects = (objects, del = ',', arraydel = ';') =>
-	[Object.keys(objects[0]).join(del)].concat(
-		objects.map(o => Object.values(o).map(a => (a instanceof Array) ? a.join(arraydel) : a).join(del)),
-	).join('\n')
+	objects.length
+		? [Object.keys(objects[0]).join(del)].concat(
+			objects.map(o => Object.values(o).map(a => (a instanceof Array) ? a.join(arraydel) : a).join(del)),
+		).join('\n')
+		: ''
 
 export const calcObjectsFromCsv = (csv, del = ',', arraydel = ';') => {
 	const lines = csv.split('\n').map(l => l.split(del))

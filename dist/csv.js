@@ -10,11 +10,11 @@ var _array = require("./array.js");
 var calcCsvFromObjects = function calcCsvFromObjects(objects) {
   var del = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ',';
   var arraydel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ';';
-  return [Object.keys(objects[0]).join(del)].concat(objects.map(function (o) {
+  return objects.length ? [Object.keys(objects[0]).join(del)].concat(objects.map(function (o) {
     return Object.values(o).map(function (a) {
       return a instanceof Array ? a.join(arraydel) : a;
     }).join(del);
-  })).join('\n');
+  })).join('\n') : '';
 };
 
 exports.calcCsvFromObjects = calcCsvFromObjects;
