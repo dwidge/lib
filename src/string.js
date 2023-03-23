@@ -1,2 +1,1 @@
-export const prepend = pre => s =>
-	pre + s
+export const prepend = (pre) => (s) => pre + s;
