@@ -7,17 +7,25 @@ exports.mapObject = exports.calcObjectsFromCsv = exports.calcCsvFromObjects = vo
 
 var _array = require("./array.js");
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 var calcCsvFromObjects = function calcCsvFromObjects(objects) {
   var del = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ',';
   var arraydel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ';';
   return objects.length ? [Object.keys(objects[0]).join(del)].concat(objects.map(function (o) {
-    return Object.values(o).map(function (a) {
-      return a instanceof Array ? a.join(arraydel) : a;
-    }).join(del);
+    return Object.values(o).map(csvFromObject(arraydel)).join(del);
   })).join('\n') : '';
 };
 
 exports.calcCsvFromObjects = calcCsvFromObjects;
+
+var csvFromObject = function csvFromObject(arraydel) {
+  return function (a) {
+    if (arraydel && a instanceof Array) return a.map(csvFromObject()).join(arraydel);
+    if (_typeof(a) === "object") return JSON.stringify(a);
+    return a;
+  };
+};
 
 var calcObjectsFromCsv = function calcObjectsFromCsv(csv) {
   var del = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ',';
@@ -32,7 +40,9 @@ var calcObjectsFromCsv = function calcObjectsFromCsv(csv) {
   };
 
   var arrstr = function arrstr(v) {
-    return v.includes(arraydel) ? v.split(arraydel).map(numstr) : numstr(v);
+    var _parseJson;
+
+    return v.includes(arraydel) ? v.split(arraydel).map(numstr) : (_parseJson = parseJson(v)) !== null && _parseJson !== void 0 ? _parseJson : numstr(v);
   };
 
   return lines.slice(1).map(function (l) {
@@ -41,6 +51,14 @@ var calcObjectsFromCsv = function calcObjectsFromCsv(csv) {
 };
 
 exports.calcObjectsFromCsv = calcObjectsFromCsv;
+
+var parseJson = function parseJson(s) {
+  try {
+    return JSON.parse(s);
+  } catch (e) {
+    return;
+  }
+};
 
 var mapObject = function mapObject(from) {
   var to = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : from;
