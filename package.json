@@ -27,7 +27,7 @@
     "rimraf": "^3.0.2"
   },
   "scripts": {
-    "build": "cross-env rm -rf dist && NODE_ENV=production babel src --out-dir dist --copy-files && rm -rf dist/__*__",
+    "build": "rimraf dist && cross-env NODE_ENV=production babel src --out-dir dist --copy-files && rimraf dist/__*__",
     "test": "jest",
     "test:w": "jest --watch",
     "lint": "esw . --ext .js,.json,.*rc --changed",
